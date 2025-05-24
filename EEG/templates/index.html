@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EEG Sağlık Tahmini</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>EEG Delta & Theta ile Sağlık Tahmini</h2>
+        
+        <form method="post" action="/predict">
+            <input type="number" step="0.01" name="theta" placeholder="Theta değeri" required />
+            <input type="number" step="0.01" name="delta" placeholder="Delta değeri" required />
+            <input type="submit" value="Sonucumu Hesapla" />
+        </form>
+
+        {% if prediction_text %}
+        <div class="result-section">
+            <div class="result-text">
+                <p class="prediction">{{ prediction_text }}</p>
+                <p class="confidence">
+                    {% if is_healthy %}
+                        %{{ confidence }} oranında EEG verilerine göre sağlıklı görünüyorsunuz.<br />
+                        EEG sonuçları açısından belirgin bir bozukluk gözlemlenmedi.
+                    {% else %}
+                        %{{ confidence }} oranında sağlıksız bir sonuç.<br />
+                        Bu sonuç net bir tanı değildir, doktorunuza danışmanız önerilir.
+                    {% endif %}
+                </p>
+            </div>
+            <div class="chart-box">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <div class="spectrogram-section">
+            <h3>Spektrogramınız böyle gözüküyor olabilir:</h3>
+            <img src="data:image/png;base64,{{ spectrogram_img }}" alt="Spektrogram Simülasyonu" class="spectrogram-img" />
+        </div>
+
+        {% endif %}
+    </div>
+
+    <script>
+        {% if prediction_probabilities %}
+        const data = {
+            labels: ['Sağlıklı', 'Sağlıksız'],
+            datasets: [{
+                data: [{{ prediction_probabilities[0] }}, {{ prediction_probabilities[1] }}],
+                backgroundColor: ['#2ecc71', '#e74c3c'],
+                hoverOffset: 6
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('pieChart'), config);
+        {% endif %}
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* mor-mavi degrade */
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 40px;
+    border-radius: 20px;
+    width: 420px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin: 50px 20px;
+}
+
+h2 {
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+input[type=number] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+input[type=submit] {
+    background-color: #8e44ad; /* Mor */
+    color: white;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+input[type=submit]:hover {
+    background-color: #6c3483;
+}
+
+.result-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.result-text {
+    flex: 1;
+    min-width: 220px;
+    text-align: left;
+    color: #fff;
+}
+
+.chart-box {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+}
+
+.prediction {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.confidence {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+.spectrogram-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.spectrogram-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.spectrogram-img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,
